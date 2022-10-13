@@ -11,7 +11,7 @@ class HospitalParserTest {
 
     @Test
     @DisplayName("ID가 파싱이 잘 되는지")
-    void name() {
+    void idParsing() {
         HospitalParser hospitalParser = new HospitalParser();
 
         Hospital hospital = hospitalParser.parse(str);
