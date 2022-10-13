@@ -24,7 +24,7 @@ public class Hospital {
     }
 
     public void setSubdivision() {
-        String[] divNames = {"피부과", "성형외과", "외과", "내과", "소아과", "가정의학과", "치과"};
+        String[] divNames = {"한의원", "한방병원", "정형외과", "교정", "관절", "화상", "봉합", "비뇨기과", "안과", "산부인과", "피부과", "성형외과", "외과", "내과", "소아과", "가정의학과", "치과"};
         subdivision = null;
         for (String divName : divNames) {
             if (name.contains(divName)) subdivision = divName;
