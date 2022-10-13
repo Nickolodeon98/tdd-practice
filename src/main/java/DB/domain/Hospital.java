@@ -8,25 +8,19 @@ public class Hospital {
     private String name;
     private String subdivision;
 
-    public String clean(String str) {
-        str.replaceAll("\'", "");
-        return str;
-    }
     public Hospital(String id, String address, String category, String emergencyRoom, String name) {
-        this.id = clean(id);
-        this.address = clean(address);
-        this.category = clean(category);
-        this.emergencyRoom = clean(emergencyRoom);
-        this.name = clean(name);
+        this.id = id;
+        this.address = address;
+        this.category = category;
+        this.emergencyRoom = emergencyRoom;
+        this.name = name;
         setDistrict();
         setSubdivision();
     }
 
-
-
-    public void setDistrict() {
-        String[] getDistrict = address.split("\\s+");
-        this.district = getDistrict[0] + " " + getDistrict[1];
+    private void setDistrict() {
+        String[] addressInfo = address.split("\\s+");
+        this.district = addressInfo[0] + " " + addressInfo[1];
     }
 
     public void setSubdivision() {

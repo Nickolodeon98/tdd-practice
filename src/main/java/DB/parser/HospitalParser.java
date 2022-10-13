@@ -7,7 +7,7 @@ public class HospitalParser implements ParseAccordingly<Hospital>{
     public Hospital parse(String toParse) {
         toParse = toParse.replaceAll("\'", "");
         String[] info = toParse.split(",");
-        return new Hospital(info[0], info[1], info[3], info[4], info[5]);
+        return new Hospital(info[0], info[1], info[2], info[6], info[10]);
     }
 
 }
