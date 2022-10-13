@@ -24,7 +24,7 @@ public class HttpClientGet {
         try {
             HttpClient client = HttpClientBuilder.create().build();
             HttpGet getRequest = new HttpGet(requestURL);
-            getRequest.addHeader("document.form.confmKey.value", key);
+            getRequest.addHeader("api-key", key);
 
             HttpResponse response = client.execute(getRequest);
 
