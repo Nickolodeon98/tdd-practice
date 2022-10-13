@@ -20,6 +20,26 @@ public class CreateHospitalCsv {
         this.readLineContext = new ReadLineContext<>(new HospitalParser(), false);
     }
 
+    public CreateHospitalCsv() {
+    }
+
+    public String createSqlQuery(Hospital hospital) {
+        String sql = String.format("SELECT * FROM `Seoul-hospitals`.`seoul-hospital`;\nINSERT INTO `Seoul-hospitals`.`seoul-hospital`\n(`id`,`address`," +
+                "`district`,`category`,`emergency_room`,`name`,`subdivision`)\nVALUES\n");
+        sql = String.join("", sql, String.format(
+                "('%s','%s','%s','%s','%s','%s'", hospital.getId(),hospital.getAddress(),hospital.getDistrict(),
+                hospital.getCategory(),hospital.getEmergencyRoom(),hospital.getName()));
+
+        if (hospital.getSubdivision() == null) {
+            sql = String.join("", sql, String.format(",%s);\n",hospital.getSubdivision()));
+        }else {
+            sql = String.join("", sql, String.format(",%s);\n",hospital.getSubdivision()));
+        }
+
+        return sql;
+    }
+
+
     public void writeASqlFile(String newFilename) throws IOException {
         List<Hospital> hospitalList = readLineContext.readLine(filename);
         File file = new File(newFilename);
