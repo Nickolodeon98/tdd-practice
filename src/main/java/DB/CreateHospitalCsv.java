@@ -27,9 +27,9 @@ public class CreateHospitalCsv {
 
         writer.write(String.format("SELECT * FROM `Seoul-hospitals`.`seoul-hospital`;\nINSERT INTO `Seoul-hospitals`.`seoul-hospital`\n(`id`,`address`," +
                 "`district`,`category`,`emergency_room`,`name`,`subdivision`)\nVALUES\n"));
-        int cnt = 0;
+        int count = 0;
         for (Hospital hospital : hospitalList) {
-            if (cnt == hospitalList.size() - 1) {
+            if (count == hospitalList.size() - 1) {
                 String str = String.format(
                         "('%s','%s','%s','%s','%s','%s'", hospital.getId(),hospital.getAddress(),hospital.getDistrict(),
                         hospital.getCategory(),hospital.getEmergencyRoom(),hospital.getName());
@@ -52,7 +52,7 @@ public class CreateHospitalCsv {
                 writer.write(String.format(",'%s'),\n",hospital.getSubdivision()));
             }
 
-            cnt++;
+            count++;
         }
 
         writer.close();
