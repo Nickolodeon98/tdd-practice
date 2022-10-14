@@ -7,13 +7,15 @@ public class Hospital {
     private String emergencyRoom;
     private String name;
     private String subdivision;
+    private String divisionInfo;
 
-    public Hospital(String id, String address, String category, String emergencyRoom, String name) {
+    public Hospital(String id, String address, String category, String emergencyRoom, String name, String divisionInfo) {
         this.id = id;
         this.address = address;
         this.category = category;
         this.emergencyRoom = emergencyRoom;
         this.name = name;
+        this.divisionInfo = divisionInfo;
         setDistrict();
         setSubdivision();
     }
@@ -25,9 +27,9 @@ public class Hospital {
 
     public void setSubdivision() {
         String[] divNames = {"한의원", "한방병원", "정형외과", "교정", "관절", "화상", "봉합", "비뇨기과", "안과", "산부인과", "피부과", "성형외과", "외과", "내과", "소아과", "가정의학과", "치과"};
-        subdivision = null;
+        subdivision = "null";
         for (String divName : divNames) {
-            if (name.contains(divName)) subdivision = divName;
+            if (name.contains(divName) || divisionInfo.contains(divName)) subdivision = divName;
         }
     }
 
