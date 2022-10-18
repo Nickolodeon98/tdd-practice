@@ -14,12 +14,19 @@ public class SqlQuery {
     public SqlQuery() throws SQLException, ClassNotFoundException {
         this.env = System.getenv();
         Class.forName("com.mysql.cj.jdbc.Driver");
-        this.connection = DriverManager.getConnection(env.get("DB_HOST"), env.get("DB_USER"), env.get("DB_PASSWORD"));
-
     }
 
     public void insert() throws ClassNotFoundException, SQLException {
-        PreparedStatement ps = connection.prepareStatement("INSERT INTO seoul-hospitals-table VALUES (?, ?, ?, ?, ?, ?, ?)");
+        connection = DriverManager.getConnection(env.get("DB_HOST"), env.get("DB_USER"), env.get("DB_PASSWORD"));
+
+        PreparedStatement ps = connection.prepareStatement("INSERT INTO `Seoul-hospitals`.`seoul-hospitals-table`\n" +
+                "(`id`,\n" +
+                "`address`,\n" +
+                "`district`,\n" +
+                "`category`,\n" +
+                "`emergency_room`,\n" +
+                "`name`,\n" +
+                "`subdivision`) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
         ReadLineContext<Hospital> readLineContext = new ReadLineContext<>(new HospitalParser());
         List<Hospital> hospitalList = readLineContext.readLine("C:\\LikeLion\\2022.10\\221011\\서울시 병의원 위치 정보.csv");
@@ -40,8 +47,10 @@ public class SqlQuery {
     }
 
     public void select() throws ClassNotFoundException, SQLException {
+        connection = DriverManager.getConnection(env.get("DB_HOST"), env.get("DB_USER"), env.get("DB_PASSWORD"));
+
         Statement s = connection.createStatement();
-        ResultSet resultSet = s.executeQuery("SELECT name FROM seoul-hospitals-table");
+        ResultSet resultSet = s.executeQuery("SELECT * FROM `Seoul-hospitals`.`seoul-hospitals-table`");
 
         resultSet.next();
         System.out.println(resultSet.getString("name"));
@@ -52,7 +61,7 @@ public class SqlQuery {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         SqlQuery sqlQuery = new SqlQuery();
-        sqlQuery.insert();
+//        sqlQuery.insert();
         sqlQuery.select();
     }
 }
