@@ -1,13 +1,13 @@
-package sql;
+package sql.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class AWSUserDaoImpl extends UserDaoAbstract {
+public class AWSUserDaoImpl extends UserDao {
 
-    @Override
+//    @Override
     public Connection makeConnection() throws ClassNotFoundException, SQLException {
         Map<String, String> env = System.getenv(); // 환경변수를 사용하여
         String dbHost = env.get("DB_HOST");
