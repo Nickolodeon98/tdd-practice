@@ -16,9 +16,11 @@ public class SqlQuery {
         Class.forName("com.mysql.cj.jdbc.Driver");
     }
 
-    public void insert() throws ClassNotFoundException, SQLException {
+    private void makeConnection() throws SQLException {
         connection = DriverManager.getConnection(env.get("DB_HOST"), env.get("DB_USER"), env.get("DB_PASSWORD"));
-
+    }
+    public void insert() throws ClassNotFoundException, SQLException {
+        makeConnection();
         PreparedStatement ps = connection.prepareStatement("INSERT INTO `Seoul-hospitals`.`seoul-hospitals-table`\n" +
                 "(`id`,\n" +
                 "`address`,\n" +
@@ -47,7 +49,7 @@ public class SqlQuery {
     }
 
     public void select() throws ClassNotFoundException, SQLException {
-        connection = DriverManager.getConnection(env.get("DB_HOST"), env.get("DB_USER"), env.get("DB_PASSWORD"));
+        makeConnection();
 
         Statement s = connection.createStatement();
         ResultSet resultSet = s.executeQuery("SELECT * FROM `Seoul-hospitals`.`seoul-hospitals-table`");
