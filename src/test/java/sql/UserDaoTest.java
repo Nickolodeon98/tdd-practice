@@ -3,6 +3,7 @@ package sql;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import sql.dao.AWSConnectionMaker;
 import sql.dao.UserDao;
 import sql.domain.User;
 
@@ -13,7 +14,7 @@ class UserDaoTest {
     @DisplayName("DB 쿼리 실행")
     @Test
     void addAndSelect() throws SQLException, ClassNotFoundException {
-        UserDao userDao = new UserDao();
+        UserDao userDao = new UserDao(new AWSConnectionMaker());
         String id = "15";
         User user = new User(id, "Kim", "1020");
         userDao.add(user);

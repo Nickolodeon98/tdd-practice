@@ -4,16 +4,18 @@ import sql.domain.User;
 
 import java.sql.*;
 
-public class UserDao {
+public class UserDao<T> {
 //    public abstract Connection makeConnection() throws ClassNotFoundException, SQLException;
-    private AWSConnectionMaker awsConnectionMaker;
+//    private AWSConnectionMaker awsConnectionMaker;
+    private ConnectionMaker<T> connectionMaker;
 
-    public UserDao() {
-        this.awsConnectionMaker = new AWSConnectionMaker();
+    public UserDao(ConnectionMaker<T> connectionMaker) {
+//        this.awsConnectionMaker = new AWSConnectionMaker();
+        this.connectionMaker = connectionMaker;
     }
 
     public void add(User user) throws SQLException, ClassNotFoundException {
-        Connection conn = awsConnectionMaker.makeConnection();
+        Connection conn = connectionMaker.makeConnection();
 
         /*DB에 쿼리 입력 후 바인딩*/
         PreparedStatement ps = conn.prepareStatement("INSERT INTO users(id, name, password) VALUES(?, ?, ?)");
@@ -29,7 +31,7 @@ public class UserDao {
     }
 
     public User select(String id) throws SQLException, ClassNotFoundException {
-        Connection conn = awsConnectionMaker.makeConnection();
+        Connection conn = connectionMaker.makeConnection();
 
         /*DB에 쿼리 입력 후 바인딩*/
         PreparedStatement ps = conn.prepareStatement("SELECT id, name, password FROM users WHERE id = ?");
