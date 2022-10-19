@@ -7,7 +7,11 @@ import java.util.Map;
 
 public class AWSUserDaoImpl extends UserDao {
 
-//    @Override
+    public AWSUserDaoImpl(ConnectionMaker connectionMaker) {
+        super(connectionMaker);
+    }
+
+    //    @Override
     public Connection makeConnection() throws ClassNotFoundException, SQLException {
         Map<String, String> env = System.getenv(); // 환경변수를 사용하여
         String dbHost = env.get("DB_HOST");
