@@ -21,4 +21,17 @@ class StackImplementationTest {
         Assertions.assertEquals(20, stack[1]);
     }
 
+    @DisplayName("push and pop")
+    @Test
+    void pushAndPop() {
+        StackImplementation stackImplementation = new StackImplementation();
+        stackImplementation.push(10);
+        stackImplementation.push(20);
+
+        stackImplementation.push(30);
+
+        Assertions.assertEquals(30, stackImplementation.pop());
+        Assertions.assertEquals(20, stackImplementation.pop());
+        Assertions.assertEquals(10, stackImplementation.pop());
+    }
 }

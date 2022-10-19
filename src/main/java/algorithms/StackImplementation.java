@@ -27,4 +27,9 @@ public class StackImplementation {
     public int[] getStack() {
         return stack;
     }
+
+    public int pop() {
+        int ret = stack[--valuePos]; // push 의 마지막에서 ++를 하고 끝나기 때문에 --를 해준다.
+        return ret;
+    }
 }
