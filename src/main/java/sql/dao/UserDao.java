@@ -6,7 +6,6 @@ import java.sql.*;
 
 public class UserDao<T> {
 //    public abstract Connection makeConnection() throws ClassNotFoundException, SQLException;
-//    private AWSConnectionMaker awsConnectionMaker;
     private ConnectionMaker<T> connectionMaker;
 
     public UserDao(ConnectionMaker<T> connectionMaker) {
@@ -48,5 +47,25 @@ public class UserDao<T> {
         conn.close();
 
         return user;
+    }
+
+    public void deleteAll() throws SQLException, ClassNotFoundException {
+        Connection conn = connectionMaker.makeConnection();
+        PreparedStatement ps = conn.prepareStatement("DELETE * FROM users");
+        ps.executeUpdate();
+
+        ps.close();
+        conn.close();
+    }
+
+    public int getCount() throws SQLException, ClassNotFoundException {
+        Connection conn = connectionMaker.makeConnection();
+        PreparedStatement ps = conn.prepareStatement("SELECT name, count(name) as cnt FROM users");
+        ResultSet rs = ps.executeQuery();
+        int ret = Integer.parseInt(rs.getString("cnt"));
+        rs.close();
+        ps.close();
+        conn.close();
+        return ret;
     }
 }
