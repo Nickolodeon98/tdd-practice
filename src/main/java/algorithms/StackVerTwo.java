@@ -1,5 +1,7 @@
 package algorithms;
 
+import java.util.EmptyStackException;
+
 public class StackVerTwo {
     private Integer[] arr;
     private int top;
@@ -22,6 +24,11 @@ public class StackVerTwo {
     }
 
     public int pop() {
+        if (this.isEmpty()) throw new EmptyStackException();
         return this.arr[--this.top];
+    }
+
+    public boolean isEmpty() {
+        return this.top == 0;
     }
 }
