@@ -31,4 +31,9 @@ public class StackVerTwo {
     public boolean isEmpty() {
         return this.top == 0;
     }
+
+    public int peek() {
+        if (this.isEmpty()) throw new EmptyStackException();
+        return arr[this.top-1];
+    }
 }

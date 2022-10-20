@@ -56,6 +56,19 @@ class StackVerTwoTest {
         assertTrue(isEmpty);
     }
 
+    @DisplayName("peek from stack")
+    @Test
+    void peek() {
+        assertEquals(20, stackVerTwo.peek());
+        stackVerTwo.pop();
+        stackVerTwo.pop();
+
+        assertThrows(EmptyStackException.class, () -> {
+           stackVerTwo.peek();
+        });
+    }
+
+
     @Test
     void realStack() {
         Stack<Integer> st = new Stack<>();
