@@ -11,13 +11,18 @@ class BracketTestTest {
     @DisplayName("Correction of brackets")
     void brackets() {
         BracketTest bracketTest = new BracketTest();
-        String str1 = "()()()";
-        String str2 = "(()()(()";
-        String str3 = "()()())";
-        String str4 = "((((((((((((((((((((((((((((((((((((((((((((((((()))))))))))))))))))))))))))))))))))))))))))))))))))))";
-        assertTrue(bracketTest.correctBrackets(str1));
-        assertFalse(bracketTest.correctBrackets(str2));
-        assertFalse(bracketTest.correctBrackets(str3));
-        assertFalse(bracketTest.correctBrackets(str4));
+        String trueSmallBrackets = "()()()";
+        String falseSmallBrackets1 = "(()()(()";
+        String falseSmallBrackets2 = "()()())";
+        String falseSmallBrackets3 = "((((((((((((((((((((((((((((((((((((((((((((((((()))))))))))))))))))))))))))))))))))))))))))))))))))))";
+        String falseVariousBrackets = "{}()[](({))";
+        String trueVariousBrackets = "{}()[](({}))";
+
+        assertTrue(bracketTest.correctBrackets(trueSmallBrackets));
+        assertFalse(bracketTest.correctBrackets(falseSmallBrackets1));
+        assertFalse(bracketTest.correctBrackets(falseSmallBrackets2));
+        assertFalse(bracketTest.correctBrackets(falseSmallBrackets3));
+        assertFalse(bracketTest.correctBrackets(falseVariousBrackets));
+        assertTrue(bracketTest.correctBrackets(trueVariousBrackets));
     }
 }
