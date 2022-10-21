@@ -1,17 +1,22 @@
 package algorithms;
 
+import java.util.Stack;
+
 public class BracketTest {
     public Boolean correctBrackets(String s) {
-//        System.out.println(s.length());
+        Stack<Character> bracketSet = new Stack<>();
 
-//        System.out.println(s.indexOf("()"));
-
-        while (s.indexOf("()") > -1) {
-            s = s.replace("()", "");
+        int i = 0;
+        while (i < s.length()) {
+            if (s.charAt(i) == ')') {
+                if (bracketSet.empty()) return false;
+                bracketSet.pop();
+                i++;
+                continue;
+            }
+            bracketSet.add(s.charAt(i++));
         }
-//        System.out.println(s);
-//        System.out.println(s.length());
 
-        return s.length() == 0;
+        return bracketSet.empty();
     }
 }
