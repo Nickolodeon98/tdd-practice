@@ -1,4 +1,4 @@
-package algorithms;
+package algorithms.bubblesort;
 
 public class ImprovedBubbleSort {
     private int[] arrToSort;

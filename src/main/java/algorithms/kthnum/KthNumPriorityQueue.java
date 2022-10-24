@@ -1,4 +1,4 @@
-package algorithms;
+package algorithms.kthnum;
 
 import java.util.PriorityQueue;
 import java.util.Queue;

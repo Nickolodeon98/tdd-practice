@@ -1,5 +1,6 @@
 package algorithms;
 
+import algorithms.kthnum.KthNumPriorityQueue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

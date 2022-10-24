@@ -1,4 +1,4 @@
-package algorithms;
+package algorithms.kthnum;
 
 import java.util.Arrays;
 

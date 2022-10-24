@@ -1,4 +1,4 @@
-package sql;
+package sql.temp;
 
 import DB.domain.Hospital;
 import DB.linereader.ReadLineContext;
@@ -9,18 +9,18 @@ import java.util.List;
 import java.util.Map;
 
 public class SqlQuery {
-    private Connection connection;
     private Map<String, String> env;
     public SqlQuery() throws SQLException, ClassNotFoundException {
         this.env = System.getenv();
         Class.forName("com.mysql.cj.jdbc.Driver");
     }
 
-    private void makeConnection() throws SQLException {
-        connection = DriverManager.getConnection(env.get("DB_HOST"), env.get("DB_USER"), env.get("DB_PASSWORD"));
+    private Connection makeConnection() throws SQLException {
+        Connection connection = DriverManager.getConnection(env.get("DB_HOST"), env.get("DB_USER"), env.get("DB_PASSWORD"));
+        return connection;
     }
     public void insert() throws ClassNotFoundException, SQLException {
-        makeConnection();
+        Connection connection = makeConnection();
         PreparedStatement ps = connection.prepareStatement("INSERT INTO `Seoul-hospitals`.`seoul-hospitals-table`\n" +
                 "(`id`,\n" +
                 "`address`,\n" +
@@ -49,7 +49,7 @@ public class SqlQuery {
     }
 
     public void select() throws ClassNotFoundException, SQLException {
-        makeConnection();
+        Connection connection = makeConnection();
 
         Statement s = connection.createStatement();
         ResultSet resultSet = s.executeQuery("SELECT * FROM `Seoul-hospitals`.`seoul-hospitals-table`");

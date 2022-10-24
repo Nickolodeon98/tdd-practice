@@ -1,4 +1,4 @@
-package algorithms;
+package algorithms.stack;
 
 import java.util.EmptyStackException;
 
