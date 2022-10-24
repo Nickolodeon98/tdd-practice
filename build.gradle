@@ -10,7 +10,6 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter:2.7.4'
     implementation 'org.testng:testng:7.1.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
@@ -21,6 +20,7 @@ dependencies {
     implementation 'org.apache.httpcomponents:httpcore:4.4.15'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.7.4'
     implementation 'org.springframework.boot:spring-boot-starter-test:2.7.4'
+    implementation 'org.springframework.boot:spring-boot-starter:2.7.4'
 
     // https://mvnrepository.com/artifact/mysql/mysql-connector-java
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.30'
