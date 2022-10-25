@@ -23,7 +23,11 @@ public class HashTable {
     public void insert(String key, int value) {
         int hashedKey = hashFunction(key);
         this.table[hashedKey] = value;
-        System.out.println(key + " " + value + "번 방에 저장이 완료되었습니다.");
+        System.out.println(key + "님은 " + value + "번 방에 저장이 완료되었습니다.");
+    }
+
+    public int search(String key) {
+        return this.table[hashFunction(key)];
     }
 
     public int hashFunction(String s) {
@@ -45,6 +49,8 @@ public class HashTable {
             nameSet.add(ht.hashFunction(names[i]));
             ht.insert(names[i], ht.hashFunction(names[i]));
         }
+
+        System.out.println(ht.search("SeunghwanJeon"));
         System.out.printf("%d %d", names.length, nameSet.size());
     }
 }
