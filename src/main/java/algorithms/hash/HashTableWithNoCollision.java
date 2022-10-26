@@ -1,30 +1,13 @@
 package algorithms.hash;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HashTableWithNoCollision {
-
-    class Node {
-        private String key;
-        private int value;
-
-        public Node(String key, int value) {
-            this.key = key;
-            this.value = value;
-        }
-
-        public String getKey() {
-            return key;
-        }
-
-        public int getValue() {
-            return value;
-        }
-    }
-
     private int size = 1000;
-    private List<Node>[] table = new ArrayList[size];
+    private List<Map<String, Integer>>[] table = new ArrayList[size];
 
     public HashTableWithNoCollision() {
     }
@@ -47,16 +30,18 @@ public class HashTableWithNoCollision {
         int position = hash(key);
         if (this.table[position] == null)
             this.table[position] = new ArrayList<>();
-        this.table[position].add(new Node(key, value));
+
+        HashMap<String, Integer> hm = new HashMap<>();
+        hm.put(key, value);
+        this.table[position].add(hm);
     }
 
     public Integer get(String key) {
         int position = hash(key);
 
-        for (Node node : table[position]) {
-            String registeredKey = node.getKey();
-            if (registeredKey.equals(key))
-                return node.getValue();
+        for (Map<String, Integer> node : table[position]) {
+            if (node.containsKey(key))
+                return node.get(key);
         }
         return null;
     }
