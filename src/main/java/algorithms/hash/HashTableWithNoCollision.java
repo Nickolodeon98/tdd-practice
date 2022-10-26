@@ -38,4 +38,27 @@ public class HashTableWithNoCollision {
             this.table[hashIdx] = new ArrayList<>();
         this.table[hashIdx].add(new Node(key, value));
     }
+
+    public Integer get(String key) {
+        int size = this.table[hash(key)].size();
+        for (int i = 0; i < size; i++) {
+            if (this.table[hash(key)].get(i).getKey().equals(key))
+                return this.table[hash(key)].get(i).getValue();
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        HashTableWithNoCollision hashTableWithNoCollision = new HashTableWithNoCollision();
+
+        hashTableWithNoCollision.insert("Yoonseo", 1);
+        hashTableWithNoCollision.insert("Seoyoon", 2);
+
+
+        if (hashTableWithNoCollision.get("Seoyoon") == 2) System.out.println("테스트 성공");
+        else System.out.println("테스트 실패");
+
+        if (hashTableWithNoCollision.get("Yoonseo") == 1) System.out.println("테스트 성공");
+        else System.out.println("테스트 실패");
+    }
 }
