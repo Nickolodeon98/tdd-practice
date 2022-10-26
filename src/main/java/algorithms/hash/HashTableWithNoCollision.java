@@ -7,9 +7,9 @@ public class HashTableWithNoCollision {
 
     class Node {
         private String key;
-        private Integer value;
+        private int value;
 
-        public Node(String key, Integer value) {
+        public Node(String key, int value) {
             this.key = key;
             this.value = value;
         }
@@ -18,47 +18,46 @@ public class HashTableWithNoCollision {
             return key;
         }
 
-        public Integer getValue() {
+        public int getValue() {
             return value;
         }
     }
-    private List<Node>[] table = new ArrayList[1000];
+
+    private int size = 1000;
+    private List<Node>[] table = new ArrayList[size];
+
+    public HashTableWithNoCollision() {
+    }
+
+    public HashTableWithNoCollision(int size) {
+        this.size = size;
+        this.table = new ArrayList[size];
+    }
 
     public int hash(String key) {
         int asciiSum = 0;
+
         for (int i = 0; i < key.length(); i++) {
             asciiSum += key.charAt(i);
         }
-        return asciiSum % 1000;
+        return asciiSum % size;
     }
 
     public void insert(String key, int value) {
-        int hashIdx = hash(key);
-        if (this.table[hashIdx] == null)
-            this.table[hashIdx] = new ArrayList<>();
-        this.table[hashIdx].add(new Node(key, value));
+        int position = hash(key);
+        if (this.table[position] == null)
+            this.table[position] = new ArrayList<>();
+        this.table[position].add(new Node(key, value));
     }
 
     public Integer get(String key) {
-        int size = this.table[hash(key)].size();
-        for (int i = 0; i < size; i++) {
-            if (this.table[hash(key)].get(i).getKey().equals(key))
-                return this.table[hash(key)].get(i).getValue();
+        int position = hash(key);
+
+        for (Node node : table[position]) {
+            String registeredKey = node.getKey();
+            if (registeredKey.equals(key))
+                return node.getValue();
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-        HashTableWithNoCollision hashTableWithNoCollision = new HashTableWithNoCollision();
-
-        hashTableWithNoCollision.insert("Yoonseo", 1);
-        hashTableWithNoCollision.insert("Seoyoon", 2);
-
-
-        if (hashTableWithNoCollision.get("Seoyoon") == 2) System.out.println("테스트 성공");
-        else System.out.println("테스트 실패");
-
-        if (hashTableWithNoCollision.get("Yoonseo") == 1) System.out.println("테스트 성공");
-        else System.out.println("테스트 실패");
     }
 }
