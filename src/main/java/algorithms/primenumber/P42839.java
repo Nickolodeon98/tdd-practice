@@ -5,14 +5,9 @@ public class P42839 {
     interface DividerMethod {
         boolean divider(int a, int b);
     }
-//    private DividerMethod dividerMethod;
 
     public P42839() {
     }
-
-//    public P42839(DividerMethod dividerMethod) {
-//        this.dividerMethod = dividerMethod;
-//    }
 
     public boolean solution(int num, DividerMethod dividerMethod) {
         for (int i = 2; dividerMethod.divider(i, num); i++) {
