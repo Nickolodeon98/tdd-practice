@@ -11,8 +11,8 @@ public class P42839 {
 
     public boolean solution(int num) {
         for (int i = 2; i < num; i++) {
-            if (num % i == 0) return false;
+            if (num % i == 0) return false; // 나누어 떨어지게 하는 값이 하나라도 있으면 소수가 아님
         }
-        return true;
+        return true; // 나누어 떨어지게 하는 값이 하나도 없으면 소수임
     }
 }
