@@ -24,9 +24,9 @@ public class P42839 {
     public static void main(String[] args) {
         P42839 p42839 = new P42839();
 
-        System.out.println(p42839.solution(35, (a, b) -> a < b));
-        System.out.println(p42839.solution(17, (a, b) -> a < (b/2)));
-        System.out.println(p42839.solution(19, (a, b) -> a < Math.sqrt(b)));
+        System.out.println(p42839.solution(35, (a, b) -> a < b)); // 첫 번째 방법
+        System.out.println(p42839.solution(17, (a, b) -> a < (b/2))); // 두 번째 방법
+        System.out.println(p42839.solution(19, (a, b) -> a < Math.sqrt(b))); // 세 번째 방법
         System.out.println(p42839.solution(23, (a, b) -> a < b));
     }
 }
