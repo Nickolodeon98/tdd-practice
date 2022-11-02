@@ -11,12 +11,14 @@ public class Eratosthenes {
         }
         boolean[] checks = new boolean[N-1];
         for (int j = 0; j < checks.length; j++) {
-            if (arr[j] > 2 && arr[j] % 2 == 0) checks[j] = false;
+            for (int l = 2; l <= Math.sqrt(N); l++) {
+                if (arr[j] > l && arr[j] % l == 0) checks[j] = true;
+            }
         }
 
         int cnt = 0;
         for (int k = 0; k < checks.length; k++) {
-            if (checks[k]) cnt++;
+            if (!checks[k]) cnt++;
         }
 
         return cnt;
@@ -24,6 +26,6 @@ public class Eratosthenes {
 
     public static void main(String[] args) {
         Eratosthenes eratosthenes = new Eratosthenes();
-        System.out.println(eratosthenes.eratosthenes(50));
+        System.out.println(eratosthenes.eratosthenes(1000000));
     }
 }
