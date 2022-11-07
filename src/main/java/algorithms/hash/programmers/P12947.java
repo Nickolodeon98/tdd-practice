@@ -12,7 +12,8 @@ package algorithms.hash.programmers;
  * */
 
 public class P12947 {
-    public int divisibleNum(int x) {
+    /* Step 1: Find the sum of each digit of given number */
+    private int divisibleNum(int x) {
         int value = x;
         int result = 0;
         while (value > 0) {
@@ -23,8 +24,13 @@ public class P12947 {
         return result;
     }
 
+    /* Step 2: Find whether a given number is divisible by the sum calculated above */
+    public boolean isHarshad(int x) {
+        return x % divisibleNum(x) == 0;
+    }
+
     public static void main(String[] args) {
         P12947 p12947 = new P12947();
-        p12947.divisibleNum(1429);
+        System.out.println(p12947.isHarshad(13));
     }
 }
