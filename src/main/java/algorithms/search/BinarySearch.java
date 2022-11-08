@@ -7,16 +7,18 @@ public class BinarySearch {
         int end = array.length-1;
 
         BinarySearch binarySearch = new BinarySearch();
-        System.out.println(binarySearch.divideAndSearch(array, 8, front, end));
+        System.out.println(binarySearch.divideAndSearch(array, 23, front, end));
     }
 
     public int divideAndSearch(int[] range, int key, int front, int end) {
-        int middle = (end - front) / 2;
+        int middle = (end + front) / 2;
 
         if (range[middle] == key) return middle;
-        else if (middle == 0) return -1;
+        else if (end - front <= 0) return -1;
 
         if (range[middle] > key) return divideAndSearch(range, key, front, middle-1);
-        else return divideAndSearch(range, key, middle+1, end);
+        else if (range[middle] < key) return divideAndSearch(range, key, middle+1, end);
+
+        return -1;
     }
 }
