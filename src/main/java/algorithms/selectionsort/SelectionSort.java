@@ -1,28 +1,29 @@
 package algorithms.selectionsort;
 
 import java.util.Arrays;
+import java.util.function.BiFunction;
 
 public class SelectionSort {
-    interface SortStrategy {
-        boolean compare(int a, int b);
+    interface SortStrategy extends BiFunction<Integer, Integer, Boolean> {
+
     }
     public int[] sort(int[] toSort, int current, SortStrategy sortStrategy) {
         /* 1단계: i = 0일 때 0 ~ arr.length-1 의 범위 내 최솟값의 인덱스 찾기
          * 2단계: i = current 로 놓고 계속 1씩 증가시키면서 만든 메서드를 재귀적으로 호출해 활용하기 */
         if (current == toSort.length-1) return toSort;
 
-        int minIdx = current; // 시작할 때는 0이지만 계속 1씩 증가한다.
-        int min = toSort[minIdx];
+        int swapIdx = current; // 시작할 때는 0이지만 계속 1씩 증가한다.
+        int min = toSort[swapIdx];
 
         for (int i = current; i < toSort.length; i++) { //범위가 계속 줄기 때문에 i의 시작 값도 인덱스에 맞춰서 증가한다.
-            if (sortStrategy.compare(toSort[i], min)) {
-                minIdx = i;
-                min = toSort[minIdx];
+            if (sortStrategy.apply(toSort[i], min)) {
+                swapIdx = i;
+                min = toSort[swapIdx];
             }
         }
 
-        int tmp = toSort[minIdx];
-        toSort[minIdx] = toSort[current]; // swap 해주는 원소의 위치도 1씩 증가한다.
+        int tmp = toSort[swapIdx];
+        toSort[swapIdx] = toSort[current]; // swap 해주는 원소의 위치도 1씩 증가한다.
         toSort[current] = tmp;
 
         return sort(toSort, current+1, sortStrategy);
