@@ -3,31 +3,10 @@ package algorithms.selectionsort;
 import java.util.Arrays;
 
 public class SelectionSort {
-
-    public int[] reverseSort(int[] toSort, int current) {
-        if (current == 0) return toSort;
-
-        int minIdx = current; // 시작할 때는 0이지만 계속 1씩 증가한다.
-        int min = toSort[minIdx];
-
-        for (int i = current; i >= 0; i--) { //범위가 계속 줄기 때문에 i의 시작 값도 인덱스에 맞춰서 증가한다.
-            if (toSort[i] < min) {
-                minIdx = i;
-                min = toSort[minIdx];
-            }
-        }
-
-        int tmp = toSort[minIdx];
-        toSort[minIdx] = toSort[current]; // swap 해주는 원소의 위치도 1씩 증가한다.
-        toSort[current] = tmp;
-
-//        System.out.printf("minIdx: %d\nmin: %d\n", minIdx, min);
-//        System.out.println(Arrays.toString(toSort));
-
-        return reverseSort(toSort, current-1);
+    interface SortStrategy {
+        boolean compare(int a, int b);
     }
-
-    public int[] sort(int[] toSort, int current) {
+    public int[] sort(int[] toSort, int current, SortStrategy sortStrategy) {
         /* 1단계: i = 0일 때 0 ~ arr.length-1 의 범위 내 최솟값의 인덱스 찾기
          * 2단계: i = current 로 놓고 계속 1씩 증가시키면서 만든 메서드를 재귀적으로 호출해 활용하기 */
         if (current == toSort.length-1) return toSort;
@@ -36,7 +15,7 @@ public class SelectionSort {
         int min = toSort[minIdx];
 
         for (int i = current; i < toSort.length; i++) { //범위가 계속 줄기 때문에 i의 시작 값도 인덱스에 맞춰서 증가한다.
-            if (toSort[i] < min) {
+            if (sortStrategy.compare(toSort[i], min)) {
                 minIdx = i;
                 min = toSort[minIdx];
             }
@@ -46,16 +25,13 @@ public class SelectionSort {
         toSort[minIdx] = toSort[current]; // swap 해주는 원소의 위치도 1씩 증가한다.
         toSort[current] = tmp;
 
-//        System.out.printf("minIdx: %d\nmin: %d\n", minIdx, min);
-//        System.out.println(Arrays.toString(toSort));
-
-        return sort(toSort, current+1);
+        return sort(toSort, current+1, sortStrategy);
     }
 
     public static void main(String[] args) {
         int[] arr = {2, 7, 4, 9, 10, 223, 111, 23, 3, 39};
         SelectionSort selectionSort = new SelectionSort();
-        System.out.println(Arrays.toString(selectionSort.sort(arr, 0)));
-        System.out.println(Arrays.toString(selectionSort.reverseSort(arr, arr.length-1)));
+        System.out.println(Arrays.toString(selectionSort.sort(arr, 0, (a, b) -> a < b)));
+        System.out.println(Arrays.toString(selectionSort.sort(arr, 0, (a, b) -> a > b)));
     }
 }
