@@ -1,4 +1,4 @@
-package algorithms.hash.programmers;
+package algorithms.programmers;
 
 /* 1단계
  * 주어진 숫자의 각 자릿수의 합을 구한다.
