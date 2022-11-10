@@ -2,9 +2,10 @@ package algorithms.selectionsort;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 
 public class SelectionSort {
-    interface SortStrategy extends BiFunction<Integer, Integer, Boolean> {
+    interface SortStrategy extends BiPredicate<Integer, Integer> { // 함수형 인터페이스 사용
 
     }
     public int[] sort(int[] toSort, int current, SortStrategy sortStrategy) {
@@ -16,7 +17,7 @@ public class SelectionSort {
         int min = toSort[swapIdx];
 
         for (int i = current; i < toSort.length; i++) { //범위가 계속 줄기 때문에 i의 시작 값도 인덱스에 맞춰서 증가한다.
-            if (sortStrategy.apply(toSort[i], min)) {
+            if (sortStrategy.test(toSort[i], min)) {
                 swapIdx = i;
                 min = toSort[swapIdx];
             }
