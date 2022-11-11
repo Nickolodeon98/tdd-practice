@@ -9,20 +9,15 @@ public class P17681 {
         String[] binaryArr1 = new String[n];
         String[] binaryArr2 = new String[n];
         for (int i = 0; i < n; i++) {
-            binaryArr1[i] = toBinaryNumberString(arr1[i]);
-            binaryArr2[i] = toBinaryNumberString(arr2[i]);
+            binaryArr1[i] = toBinaryNumberString(arr1[i], n);
+            binaryArr2[i] = toBinaryNumberString(arr2[i], n);
         }
 
         /* 2. 배열에 넣을 문자열 구성 */
         String secretCode = "";
         for (int j = 0; j < n; j++) {
-            for (int k = 0; k < binaryArr1[j].length(); k++) {
-                if (binaryArr1[j].charAt(k) == '1')
-                    secretCode = String.join("", secretCode, "#");
-                else secretCode = String.join("", secretCode, " ");
-            }
-            for (int l = 0; l < binaryArr2[j].length(); l++) {
-                if (binaryArr2[j].charAt(l) == '1')
+            for (int k = 0; k < n; k++) {
+                if (binaryArr1[j].charAt(k) == '1' || binaryArr2[j].charAt(k) == '1')
                     secretCode = String.join("", secretCode, "#");
                 else secretCode = String.join("", secretCode, " ");
             }
@@ -33,22 +28,28 @@ public class P17681 {
         return answer;
     }
 
-    public String toBinaryNumberString(int decimalNum) {
+    public String toBinaryNumberString(int decimalNum, int n) {
         String binary = "";
         while (decimalNum > 1) {
             binary = String.join("", Integer.toString(decimalNum % 2), binary);
             decimalNum /= 2;
         }
         binary = String.join("", String.valueOf(decimalNum % 2), binary);
+
+        while (binary.length() < n)
+            binary = String.join("", "0", binary);
+
         return binary;
     }
 
     public static void main(String[] args) {
         P17681 p17681 = new P17681();
-        System.out.println(p17681.toBinaryNumberString(28));
-        int[] testArr1 = {9, 20, 28, 18, 11};
-        int[] testArr2 = {30, 1, 21, 17, 28};
+        int[] testArr1 = {46, 33, 33 ,22, 31, 50};
+        int[] testArr2 = {27 ,56, 19, 14, 14, 10};
+        for (int i : testArr2) {
+            System.out.println(p17681.toBinaryNumberString(i, 6));
+        }
 
-        p17681.solution(5, testArr1, testArr2);
+        p17681.solution(6, testArr1, testArr2);
     }
 }
