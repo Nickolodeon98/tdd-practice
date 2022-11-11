@@ -2,9 +2,6 @@ package algorithms.programmers;
 
 import java.util.Arrays;
 
-
-
-
 public class P17681 {
     public String[] solution(int n, int[] arr1, int[] arr2) {
         int INITIAL_INDEX = 0;
@@ -20,7 +17,7 @@ public class P17681 {
 
         for (int k = 0; k < n; k++) {
             /* 현재 가리키고 있는 인덱스의 원소를 2진수로 변환 */
-            if (toBinaryNumberString(arr1[current], n).charAt(k) == '1' || toBinaryNumberString(arr2[current], n).charAt(k) == '1')
+            if (toBinaryNumberString(arr1[current] | arr2[current], n).charAt(k) == '1')
                 secretCode = String.join("", secretCode, "#");
             else secretCode = String.join("", secretCode, " ");
         }
