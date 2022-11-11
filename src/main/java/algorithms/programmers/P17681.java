@@ -3,6 +3,15 @@ package algorithms.programmers;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
+/* 테스트 1 〉	통과 (1.32ms, 73MB)
+ * 테스트 2 〉	통과 (3.87ms, 77.8MB)
+ * 테스트 3 〉	통과 (0.30ms, 76.1MB)
+ * 테스트 4 〉	통과 (1.59ms, 84.9MB)
+ * 테스트 5 〉	통과 (1.09ms, 74.6MB)
+ * 테스트 6 〉	통과 (2.32ms, 72.5MB)
+ * 테스트 7 〉	통과 (0.89ms, 81.5MB)
+ * 테스트 8 〉	통과 (0.83ms, 76.4MB)
+ * */
 public class P17681 {
     public String[] solution(int n, int[] arr1, int[] arr2) {
         int INITIAL_INDEX = 0;
@@ -16,7 +25,7 @@ public class P17681 {
         String secretCode = "";
         if (current == n) return answer;
         /* 현재 가리키고 있는 인덱스의 원소를 2진수로 변환 */
-        String binaryNum = toBinaryNumberString(arr1[current] | arr2[current]);
+        String binaryNum = Integer.toBinaryString(arr1[current] | arr2[current]);
         secretCode = binaryNum.replaceAll("1", "#");
         secretCode = secretCode.replaceAll("0", " ");
         secretCode = String.join("", " ".repeat(n-secretCode.length()), secretCode);
@@ -26,19 +35,16 @@ public class P17681 {
         return recursiveGridBuilder(n, arr1, arr2, ++current, answer);
     }
 
-    public String toBinaryNumberString(int decimalNum) {
-        String binary = "";
-        while (decimalNum > 1) {
-            binary = String.join("", Integer.toString(decimalNum % 2), binary);
-            decimalNum /= 2;
-        }
-        binary = String.join("", String.valueOf(decimalNum % 2), binary);
-
-//        while (binary.length() < n)
-//            binary = String.join("", "0", binary);
-
-        return binary;
-    }
+//    public String toBinaryNumberString(int decimalNum) {
+//        String binary = "";
+//        while (decimalNum > 1) {
+//            binary = String.join("", Integer.toString(decimalNum % 2), binary);
+//            decimalNum /= 2;
+//        }
+//        binary = String.join("", String.valueOf(decimalNum % 2), binary);
+//
+//        return binary;
+//    }
 
     public static void main(String[] args) {
         P17681 p17681 = new P17681();
