@@ -46,10 +46,6 @@ public class P17681 {
         P17681 p17681 = new P17681();
         int[] testArr1 = {46, 33, 33 ,22, 31, 50};
         int[] testArr2 = {27 ,56, 19, 14, 14, 10};
-        for (int i : testArr2) {
-            System.out.println(p17681.toBinaryNumberString(i, 6));
-        }
-
         p17681.solution(6, testArr1, testArr2);
     }
 }
