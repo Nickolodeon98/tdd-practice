@@ -4,10 +4,6 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 
 public class P17681 {
-    interface CharComparison extends Predicate<Character> {
-
-    }
-
     public String[] solution(int n, int[] arr1, int[] arr2) {
         int INITIAL_INDEX = 0;
         String[] answer = new String[n];
@@ -19,21 +15,18 @@ public class P17681 {
         /* 배열에 넣을 문자열 구성 */
         String secretCode = "";
         if (current == n) return answer;
-        Predicate<Character> equalsOne = (ch) -> ch == '1';
         /* 현재 가리키고 있는 인덱스의 원소를 2진수로 변환 */
-        String binaryNum = toBinaryNumberString(arr1[current] | arr2[current], n);
+        String binaryNum = toBinaryNumberString(arr1[current] | arr2[current]);
         secretCode = binaryNum.replaceAll("1", "#");
         secretCode = secretCode.replaceAll("0", " ");
-//            if (equalsOne.test(binaryNum.charAt(k)))
-//                secretCode = String.join("", secretCode, "#");
-//            else secretCode = String.join("", secretCode, " ");
+        secretCode = String.join("", " ".repeat(n-secretCode.length()), secretCode);
         answer[current] = secretCode;
 
         /* 재귀 호출 */
         return recursiveGridBuilder(n, arr1, arr2, ++current, answer);
     }
 
-    public String toBinaryNumberString(int decimalNum, int n) {
+    public String toBinaryNumberString(int decimalNum) {
         String binary = "";
         while (decimalNum > 1) {
             binary = String.join("", Integer.toString(decimalNum % 2), binary);
@@ -41,8 +34,8 @@ public class P17681 {
         }
         binary = String.join("", String.valueOf(decimalNum % 2), binary);
 
-        while (binary.length() < n)
-            binary = String.join("", "0", binary);
+//        while (binary.length() < n)
+//            binary = String.join("", "0", binary);
 
         return binary;
     }
