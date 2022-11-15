@@ -10,6 +10,19 @@ public class QuickSort {
      * 질문: 만약 중복되는 수가 기준값이 되었다면 분류할 수 없는데 어떤 방법을 써서 정렬할 수 있을까?
      *  답: 어차피 중복되는 수 두개는 붙어있어야 하므로 두 개가 한 곳에 같이 있어도 상관 없다. */
 
+    // 리턴할 때 재귀적으로 나누어진 배열들을 더 쪼개고, 마지막에 병합함으로서 정렬한다. 이 부분을 외부 메소드로 분리해도 된다.
+    private List<Integer> merge(List<Integer> left, List<Integer> centre, List<Integer> right) {
+        List<Integer> processed = divideIntoThree(left); // 결국 원소 하나의 리스트가 될 때까지 쪼개고 병합한 후에 processed 에 결과가 할당된다.
+        System.out.println("left:\n" + processed);
+        processed.addAll(centre); // 정렬된 중간 리스트를 더한다.
+        System.out.println("centre:\n" + processed);
+        processed.addAll(divideIntoThree(right)); // 정렬된 오른쪽 리스트를 더한다.
+        System.out.println("right:\n" + processed);
+        System.out.println("--------------------");
+        return processed;
+    }
+
+
     public List<Integer> divideIntoThree(List<Integer> arrToBeSorted) {
         if (arrToBeSorted.size() <= 1 || arrToBeSorted.stream().distinct().count() == 1)
             return arrToBeSorted; // 더 이상 쪼갤 수 없을 때 현재 리스트를 리턴한다.
@@ -25,16 +38,7 @@ public class QuickSort {
             else if (pivot > i) left.add(i);
             else centre.add(i);
         }
-
-        // 리턴할 때 재귀적으로 나누어진 배열들을 더 쪼개고, 마지막에 병합함으로서 정렬한다.
-        List<Integer> processed = divideIntoThree(left); // 결국 원소 하나의 리스트가 될 때까지 쪼개고 병합한 후에 processed 에 결과가 할당된다.
-        System.out.println("left:\n" + processed);
-        processed.addAll(divideIntoThree(centre)); // 정렬된 중간 리스트를 더한다.
-        System.out.println("centre:\n" + processed);
-        processed.addAll(divideIntoThree(right)); // 정렬된 오른쪽 리스트를 더한다.
-        System.out.println("right:\n" + processed);
-        System.out.println("--------------------");
-        return processed;
+        return merge(left, centre, right);
     }
 
     public static void main(String[] args) {
