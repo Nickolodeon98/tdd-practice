@@ -1,7 +1,6 @@
 package algorithms.quicksort;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class QuickSort {
@@ -12,7 +11,8 @@ public class QuickSort {
      *  답: 어차피 중복되는 수 두개는 붙어있어야 하므로 두 개가 한 곳에 같이 있어도 상관 없다. */
 
     public List<Integer> divideIntoThree(List<Integer> arrToBeSorted) {
-        if (arrToBeSorted.size() <= 1) return arrToBeSorted; // 더 이상 쪼갤 수 없을 때 현재 리스트를 리턴한다.
+        if (arrToBeSorted.size() <= 1 || arrToBeSorted.stream().distinct().count() == 1)
+            return arrToBeSorted; // 더 이상 쪼갤 수 없을 때 현재 리스트를 리턴한다.
 
         int pivotIdx = arrToBeSorted.size() / 2;
         int pivot = arrToBeSorted.get(pivotIdx);
@@ -26,8 +26,6 @@ public class QuickSort {
             else centre.add(i);
         }
 
-        System.out.print(left + "\n" + centre + "\n" + right + "\n");
-
         // 리턴할 때 재귀적으로 나누어진 배열들을 더 쪼개고, 마지막에 병합함으로서 정렬한다.
         List<Integer> processed = divideIntoThree(left); // 결국 원소 하나의 리스트가 될 때까지 쪼개고 병합한 후에 processed 에 결과가 할당된다.
         System.out.println("left:\n" + processed);
@@ -35,13 +33,13 @@ public class QuickSort {
         System.out.println("centre:\n" + processed);
         processed.addAll(divideIntoThree(right)); // 정렬된 오른쪽 리스트를 더한다.
         System.out.println("right:\n" + processed);
-
+        System.out.println("--------------------");
         return processed;
     }
 
     public static void main(String[] args) {
         QuickSort quickSort = new QuickSort();
         List<Integer> testArr = List.of(20, 18, 5, 19, 40, 50, 5, 25);
-        quickSort.divideIntoThree(testArr);
+        System.out.println(quickSort.divideIntoThree(testArr));
     }
 }
