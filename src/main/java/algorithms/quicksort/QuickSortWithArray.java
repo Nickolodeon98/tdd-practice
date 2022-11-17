@@ -28,7 +28,7 @@ public class QuickSortWithArray {
          * 아니면 우선 직관적으로 leftIdx 를 pivotIdx 에 도달할 때까지 증가시키면서 교환한 후에
          * rightIdx 를 감소시키면서 교환하는 논리를 코드로 그대로 구현할 것인지 결정해야 한다.
          * 지금은 첫 구현이므로 후자로 하기로 한다. */
-        while (leftIdx < rightIdx) {
+        while (leftIdx <= rightIdx) { // 같을 때 (leftIdx == rightIdx) 에도 교환은 일어난다는 뜻이다. 같은지 확인하는 비용이 더 많이 들기 때문에 교환한다.
             if (arr[leftIdx] < pivot) { // 작거나 같으면 안되는 이유는 pivot 에 도달했을 때 이 조건문을 빠져나와서 밑으로 들어가야 하기 때문이다.
                 leftIdx += 1; // 이미 작으면 포인터만 증가시킨다.
                 continue;
