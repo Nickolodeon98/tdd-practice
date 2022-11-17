@@ -37,17 +37,17 @@ public class QuickSortWithArray {
                 rightIdx -= 1;
                 continue;
             }
-            System.out.println("left: " + leftIdx + " right: " + rightIdx);
             swap(leftIdx, rightIdx); // 이건가?
             leftIdx += 1;
             rightIdx -= 1;
+            System.out.println("left: " + leftIdx + " right: " + rightIdx);
         }
 
         System.out.println(Arrays.toString(arr));
     }
 
     public static void main(String[] args) {
-        int[] testArr = {20, 18, 5, 19, 40, 50, 4, 25};
+        int[] testArr = {20, 18, 5, 19, 40, 50, 5, 25};
         QuickSortWithArray quickSortWithArray = new QuickSortWithArray(testArr);
         quickSortWithArray.switchOrStay();
     }

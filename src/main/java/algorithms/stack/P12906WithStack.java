@@ -16,7 +16,7 @@ public class P12906WithStack {
             remainder.push(i);
         }
 
-        Collections.reverse(remainder);
+//        Collections.reverse(remainder);
 
         int[] answer = new int[remainder.size()];
         for (int i = 0; i < answer.length; i++) {

@@ -1,7 +1,5 @@
 package algorithms.stack;
 
-import algorithms.programmers.P12910;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +23,7 @@ public class P12906 {
 
     public static void main(String[] args) {
         P12906 p12906 = new P12906();
-        int[] test = {4, 4, 4, 3, 3};
+        int[] test = {1,1,3,3,0,1,1};
         int[] testAns = p12906.solution(test);
 
         System.out.println(Arrays.toString(testAns));

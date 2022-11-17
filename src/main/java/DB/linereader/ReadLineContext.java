@@ -32,6 +32,7 @@ public class ReadLineContext<T> {
             while ((str = reader.readLine()) != null) {
                 list.add(parser.parse(str));
             }
+            reader.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

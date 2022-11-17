@@ -3,7 +3,8 @@ package algorithms.programmers;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-/* 테스트 1 〉	통과 (1.32ms, 73MB)
+/* 2진수 변환 메서드 직접 구현했을 때
+ * 테스트 1 〉	통과 (1.32ms, 73MB)
  * 테스트 2 〉	통과 (3.87ms, 77.8MB)
  * 테스트 3 〉	통과 (0.30ms, 76.1MB)
  * 테스트 4 〉	통과 (1.59ms, 84.9MB)
@@ -12,6 +13,16 @@ import java.util.function.Predicate;
  * 테스트 7 〉	통과 (0.89ms, 81.5MB)
  * 테스트 8 〉	통과 (0.83ms, 76.4MB)
  * */
+
+/* Integer.toBinaryString() 사용했을 때
+ * 테스트 1 〉	통과 (0.81ms, 76.6MB)
+ * 테스트 2 〉	통과 (1.99ms, 73.6MB)
+ * 테스트 3 〉	통과 (0.23ms, 77.6MB)
+ * 테스트 4 〉	통과 (1.09ms, 76.8MB)
+ * 테스트 5 〉	통과 (0.72ms, 77.1MB)
+ * 테스트 6 〉	통과 (1.22ms, 71.1MB)
+ * 테스트 7 〉	통과 (0.47ms, 82.7MB)
+ * 테스트 8 〉	통과 (0.42ms, 77.6MB)*/
 public class P17681 {
     public String[] solution(int n, int[] arr1, int[] arr2) {
         int INITIAL_INDEX = 0;
