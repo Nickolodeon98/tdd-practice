@@ -12,6 +12,10 @@ public class QuickSortWithArray {
         this.arr = arr;
     }
 
+    public int[] getArr() {
+        return arr;
+    }
+
     public void swap(int candidate1, int candidate2) {
         int tmp = arr[candidate1];
         arr[candidate1] = arr[candidate2];
@@ -46,9 +50,12 @@ public class QuickSortWithArray {
         System.out.println(Arrays.toString(arr));
     }
 
-    public int[] sort(int startIdx, int endIdx) { // 최초의 start 와 end 는 각각 arr 의 가장 첫 인덱스와 가장 마지막 인덱스이다.
+    public void sort(int startIdx, int endIdx) { // 최초의 start 와 end 는 각각 arr 의 가장 첫 인덱스와 가장 마지막 인덱스이다.
+
+        if (startIdx == endIdx) return;
+
         int oldPivotIdx = arr.length / 2; // 지금까지의 기준값 인덱스 선정 방식
-        int pivotIdx = (endIdx - startIdx + 1) / 2; // 변경된 선정 방식
+        int pivotIdx = (endIdx + startIdx + 1) / 2; // 변경된 선정 방식
 
         int pivot = arr[pivotIdx]; // pivot 값 선정
 
@@ -71,8 +78,10 @@ public class QuickSortWithArray {
             leftIdx++;
             rightIdx--;
         }
-        /* 여기로 나왔을 떄는 이미 교차되어서 rightIdx < leftIdx 인 상황이다. */
-
+        /* 여기로 나왔을 떄는 이미 교차되어서 rightIdx < leftIdx 인 상황이다.
+         * 그러므로, rightIdx 가 첫 번째 분할의 endIdx, leftIdx 가 두 번째 분할의 startIdx 가 되어서 재귀 호출시킨다. */
+        sort(startIdx, rightIdx);
+        sort(leftIdx, endIdx);
     }
 
 
@@ -80,6 +89,8 @@ public class QuickSortWithArray {
     public static void main(String[] args) {
         int[] testArr = {20, 18, 5, 19, 40, 50, 5, 25};
         QuickSortWithArray quickSortWithArray = new QuickSortWithArray(testArr);
-        quickSortWithArray.switchOrStay();
+//        quickSortWithArray.switchOrStay();
+        quickSortWithArray.sort(0, 7);
+        System.out.println(Arrays.toString(quickSortWithArray.getArr()));
     }
 }
