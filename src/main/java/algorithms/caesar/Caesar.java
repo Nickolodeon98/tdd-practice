@@ -1,8 +1,11 @@
 package algorithms.caesar;
 
+import java.util.Optional;
+
 public class Caesar {
     /* 우선 하나의 문자가 주어졌을 때 밀 수 있는 알고리즘을 구현한다. */
     public char pullBehind(char c, int n) {
+        if (c == ' ') return c;
         int pulled = c + n;
         if (Character.isLowerCase(c)) {
             if (pulled > 122) pulled -= 26;
@@ -20,13 +23,14 @@ public class Caesar {
             sb.append(pullBehind(s.charAt(i), n));
         }
         answer = sb.toString();
-        System.out.println(answer);
+
         return answer;
     }
 
     public static void main(String[] args) {
         Caesar caesar = new Caesar();
-        caesar.solution("ABc", 3); // DEf 가 나와야 함
+        String answer = caesar.solution("A B c", 3); // DEf 가 나와야 함
+        System.out.println(answer);
 //        System.out.println(caesar.pullBehind('z', 3));
     }
 }
