@@ -11,7 +11,7 @@ public class Caesar {
             if (pulled > 122) pulled -= 26;
             return (char) pulled;
         }
-        if (pulled > 90 && pulled < 97) pulled -= 26;
+        if (pulled > 90) pulled -= 26;
         return (char) pulled;
     }
 
@@ -29,8 +29,8 @@ public class Caesar {
 
     public static void main(String[] args) {
         Caesar caesar = new Caesar();
-        String answer = caesar.solution("A B c", 3); // DEf 가 나와야 함
-        System.out.println(answer);
+        String answer = caesar.solution("   ", 3); // DEf 가 나와야 함
+        System.out.print(answer + "e");
 //        System.out.println(caesar.pullBehind('z', 3));
     }
 }
