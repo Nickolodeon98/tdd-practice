@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Fibonacci {
-    public int findFromSequence(int n) {
-        if (n == 1 || n == 2) return 1;
-        List<Integer> sequence = new ArrayList<>();
-        sequence.add(1);
-        sequence.add(1);
+    public Long findFromSequence(int n) {
+        if (n == 1 || n == 2) return 1L;
+        List<Long> sequence = new ArrayList<>();
+        sequence.add(1L);
+        sequence.add(1L);
 
         for (int i = 2; i < n; i++) {
             sequence.add(sequence.get(i-2) + sequence.get(i-1));
@@ -19,6 +19,6 @@ public class Fibonacci {
 
     public static void main(String[] args) {
         Fibonacci fibonacci = new Fibonacci();
-        fibonacci.findFromSequence(10);
+        System.out.println(fibonacci.findFromSequence(80));
     }
 }
