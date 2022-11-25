@@ -18,7 +18,8 @@ class GreatestCommonDivisorTest {
     @Test
     @DisplayName("최대공약수를 찾는다.")
     void findGcd() {
-        assertEquals(2, greatestCommonDivisor.computeDivisor(14, 16));
+        assertEquals(64, greatestCommonDivisor.computeDivisor(64, 128));
+        assertEquals(14, greatestCommonDivisor.computeDivisor(196, 42));
     }
 
 }
