@@ -41,4 +41,17 @@ class StudentTest {
             System.out.println(likeAlgorithmLecturer);
         }
     }
+
+    @Test
+    void findNameLength() {
+        List<Integer> nameLengths = lecturers.stream()
+                .filter(Lecturer::isLikeSpringBoot)
+                .map(lecturer -> lecturer.getName().length())
+                .collect(Collectors.toList());
+
+        for (Integer nameLength : nameLengths) {
+            System.out.println(nameLength);
+        }
+    }
+
 }
