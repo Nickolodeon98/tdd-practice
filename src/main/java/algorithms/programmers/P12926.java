@@ -1,6 +1,6 @@
-package algorithms.caesar;
+package algorithms.programmers;
 
-public class Caesar {
+public class P12926 {
     /* 우선 하나의 문자가 주어졌을 때 밀 수 있는 알고리즘을 구현한다. */
     public char pullBehind(char c, int n) {
         if (c == ' ') return c;
@@ -23,11 +23,5 @@ public class Caesar {
         answer = sb.toString();
 
         return answer;
-    }
-
-    public static void main(String[] args) {
-        Caesar caesar = new Caesar();
-        String answer = caesar.solution("ABc", 3); // DEf 가 나와야 함
-        System.out.print(answer);
     }
 }
