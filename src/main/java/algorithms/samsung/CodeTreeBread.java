@@ -103,7 +103,7 @@ public class CodeTreeBread {
   public int process() {
     Person[] people = readInput();
 
-    System.out.println("memoization: " + m);
+//    System.out.println("memoization: " + m);
 //    for (int[] row : web) {
 //      for (int column : row)
 //        System.out.print(column + " ");
@@ -141,14 +141,14 @@ public class CodeTreeBread {
 
       //    Step 3: 사람이 출발하는 곳 -> 베이스캠프 들어간다
       if (m >= count) {
-        System.out.println("hereherehere");
+//        System.out.println("hereherehere");
         int[] xAndY = initiate(people[count], web);
         people[count].setCurrentX(xAndY[0]);
-        System.out.println("toChangeX: " + xAndY[0]);
-        System.out.println("changedX: " + people[count].currentX);
+//        System.out.println("toChangeX: " + xAndY[0]);
+//        System.out.println("changedX: " + people[count].currentX);
         people[count].setCurrentY(xAndY[1]);
-        System.out.println("changedY: " + people[count].currentY);
-        System.out.println("toChangeY: " + xAndY[1]);
+//        System.out.println("changedY: " + people[count].currentY);
+//        System.out.println("toChangeY: " + xAndY[1]);
         web[xAndY[0]][xAndY[1]] = -1;
       }
 //      System.out.println("Count: " + count);
@@ -157,18 +157,27 @@ public class CodeTreeBread {
     return count;
   }
 
-  private int[] initiate(Person person, int[][] web) {
+  public int[] initiate(Person person, int[][] web) {
+//    System.out.println("this is n: " + n);
+//    System.out.println("web[2][1]: " + web[2][1]);
+    int[][] dist = BFS(person.goalX, person.goalY);
 
-    int[][] dist = BFS(person.currentX, person.currentY);
+//    for (int[] row : dist) {
+//      for (int column : row)
+//        System.out.print(" " + column);
+//      System.out.println();
+//    }
+
     // 모든 거리 중 최단거리를 찾는다.
     int minDist = 10000;
     int minX = 0, minY = 0;
     for (int k = 1; k <= n; k++) {
       for (int l = 1; l <= n; l++) {
         if (web[k][l] != 1) {
-
+//          System.out.println("continued with: " + web[k][l]);
           continue;
         }
+//        System.out.println("not continued: " + dist[k][l]);
         if (minDist > dist[k][l]) {
           minDist = dist[k][l];
           minX = k;
@@ -176,7 +185,10 @@ public class CodeTreeBread {
         }
       }
     }
-    return new int[]{minX, minY};
+    int[] coords = new int[2];
+    coords[0] = minX;
+    coords[1] = minY;
+    return coords;
   }
 
   private int[][] BFS(int x, int y) {
@@ -235,7 +247,7 @@ public class CodeTreeBread {
         continue;
       }
       if (minDist > dist[px][py]) {
-        System.out.println("update");
+//        System.out.println("update");
         minDist = dist[px][py];
         minX = px;
         minY = py;
@@ -280,7 +292,7 @@ public class CodeTreeBread {
   public static void main(String[] args) {
     CodeTreeBread solution = new CodeTreeBread();
     int answer = solution.process();
-    System.out.println(answer);
+//    System.out.println(answer);
   }
 
 }
