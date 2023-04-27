@@ -1,5 +1,6 @@
 package algorithms.baekjoon;
 
+import algorithms.baekjoon.MeetingAllocation.Meeting;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,9 +21,9 @@ public class B1931 {
     }
 
     Meeting() {
-      this.start = 0;
-      this.end = 0;
-      this.gap = 0;
+      this.start = 2147483647;
+      this.end = 2147483647;
+      this.gap = 2147483647;
     }
 
     int getGap() {
@@ -38,82 +39,156 @@ public class B1931 {
     }
   }
 
+  public List<Meeting> sortMeeting(List<Meeting> meetings, Pivoting pivoting) {
+    for (Meeting meeting : meetings) {
+      System.out.println(meeting.getStart() + ", " + meeting.getEnd());
+    }
 
-  public int computeGap(Meeting[] meetings, Meeting curStart, List<Meeting> gatherings) {
-    int minGap = 9999;
+    List<Meeting> sortedMeetings = divide(meetings, pivoting);
+
+    for (Meeting meeting : sortedMeetings) {
+      System.out.println(meeting.getStart() + ", " + meeting.getEnd());
+    }
+
+    return sortedMeetings;
+  }
+
+  public boolean isAllSame(List<Meeting> meetings, Pivoting pivoting) {
+    int standard = pivoting.pivot(meetings.get(0));
+    for (Meeting m : meetings) {
+      if (pivoting.pivot(m) != standard)
+        return false;
+    }
+    return true;
+  }
+
+  interface Pivoting {
+    int pivot(Meeting meeting);
+  }
+
+  public List<Meeting> divide(List<Meeting> meetings, Pivoting pivoting) {
+    if (meetings.size() <= 1 || isAllSame(meetings, pivoting))
+      return meetings;
+
+    int pivotIdx = meetings.size() / 2;
+    int pivot = pivoting.pivot(meetings.get(pivotIdx));
+
+    List<Meeting> left = new ArrayList<>();
+    List<Meeting> center = new ArrayList<>();
+    List<Meeting> right = new ArrayList<>();
+
+    for (Meeting single : meetings) {
+      if (pivoting.pivot(single) < pivot) {
+        left.add(single);
+        continue;
+      }
+      if (pivoting.pivot(single) > pivot) {
+        right.add(single);
+        continue;
+      }
+      center.add(single);
+    }
+
+    return merge(left, center, right, pivoting);
+  }
+
+  public List<Meeting> merge(List<Meeting> left, List<Meeting> center, List<Meeting> right, Pivoting pivoting) {
+    List<Meeting> processed = divide(left, pivoting);
+    processed.addAll(center);
+    processed.addAll(divide(right, pivoting));
+    return processed;
+  }
+//  정렬 끝난 후:
+
+
+
+
+  public int computeGap(List<Meeting> meetings, Meeting curStart) {
+    int minGap = 2147483647;
 
     int minI = -1;
 
-    for (int i = 0; i < meetings.length; i++) {
-      if (gatherings.contains(meetings[i])) continue;
-
-      if (curStart == meetings[i]) continue;
-
-      if (curStart.getStart() - meetings[i].getEnd() >= 0) {
-        if (minGap > curStart.getStart() - meetings[i].getStart()) {
-          minGap = curStart.getStart() - meetings[i].getEnd();
+    for (int i = 0; i < meetings.size(); i++) {
+      if (meetings.get(i).getStart() - curStart.getEnd() >= 0) {
+        if (minGap > meetings.get(i).getEnd() - curStart.getEnd()) {
+          minGap = meetings.get(i).getEnd() - curStart.getEnd();
           minI = i;
-          continue;
         }
-        if (minGap == curStart.getStart() - meetings[i].getStart()) {
-          if (meetings[minI].getGap() > meetings[i].getGap()) {
-
+        if (minGap == meetings.get(i).getEnd() - curStart.getEnd()) {
+          if (meetings.get(i).getStart() < meetings.get(minI).getStart()) {
             minI = i;
           }
         }
       }
     }
-
     return minI;
   }
 
 
-  public Meeting[] promptUser() {
+  public List<Meeting> promptUser() {
     Scanner sc = new Scanner(System.in);
 
     int N = Integer.parseInt(sc.nextLine());
 
-    Meeting[] meetings = new Meeting[N];
+    List<Meeting> meetings = new ArrayList<>();
 
     for (int i = 0; i < N; i++) {
       String[] temporalInfo = sc.nextLine().split(" ");
       Meeting meeting = new Meeting(Integer.parseInt(temporalInfo[0]), Integer.parseInt(temporalInfo[1]));
-      meetings[i] = meeting;
+      meetings.add(meeting);
     }
+    List<Meeting> sortedMeetings = sortMeeting(meetings, Meeting::getStart);
 
-    return meetings;
+    sortedMeetings = sortMeeting(sortedMeetings, Meeting::getEnd);
+
+    return sortedMeetings;
   }
 
   public int solution() {
-    int currentMeeting = 0;
-    int counter = 0;
+    int counter = 1;
 
-    List<Meeting> results = new ArrayList<>();
+    List<Meeting> meetings = promptUser();
 
-    Meeting[] meetings = promptUser();
+    int curStart = meetings.get(0).getStart();
+    int curEnd = meetings.get(0).getEnd();
 
-    Meeting latestMeeting = new Meeting();
+    for (int j = 1; j < meetings.size(); j++) {
+      if (meetings.get(j).getStart() >= curEnd) {
+        curEnd = meetings.get(j).getEnd();
+        counter++;
+      }
 
-    for (Meeting m : meetings) {
-      currentMeeting = m.getEnd();
-      if (currentMeeting > latestMeeting.getEnd())
-        latestMeeting = m;
-    }
-    results.add(latestMeeting);
-    int idx = 0;
-
-    while (true) {
-      idx = computeGap(meetings, latestMeeting, results);
-      if (idx == -1) break;
-      results.add(meetings[idx]);
-      latestMeeting = meetings[idx];
     }
 
-    counter = results.size();
-    for (Meeting m : results) {
-      System.out.println(m.getStart() + ", " + m.getEnd());
-    }
     return counter;
+
+
+//    Meeting latestMeeting = new Meeting();
+//
+//    for (Meeting m : meetings) {
+//      if (m.getEnd() < latestMeeting.getEnd()) {
+//        latestMeeting = m;
+//        continue;
+//      }
+//      if (m.getEnd() == latestMeeting.getEnd()) {
+//        if (latestMeeting.getGap() > m.getGap()) {
+//          latestMeeting = m;
+//        }
+//      }
+//    }
+//    meetings.remove(latestMeeting);
+//    int idx = 0;
+//
+//    while (true) {
+//      System.out.println(latestMeeting.getStart() + ", " + latestMeeting.getEnd());
+//      idx = computeGap(meetings, latestMeeting);
+//      if (idx == -1) break;
+//      latestMeeting = meetings.get(idx);
+//      counter++;
+//      meetings.remove(idx);
+//    }
+
+//    return counter;
   }
 
   public static void main(String[] args) {
