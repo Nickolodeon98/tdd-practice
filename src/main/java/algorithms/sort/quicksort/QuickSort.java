@@ -1,4 +1,4 @@
-package algorithms.quicksort;
+package algorithms.sort.quicksort;
 
 import java.util.ArrayList;
 import java.util.List;

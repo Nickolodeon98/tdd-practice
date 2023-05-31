@@ -1,7 +1,6 @@
-package algorithms.selectionsort;
+package algorithms.sort.selectionsort;
 
 import java.util.Arrays;
-import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 
 public class SelectionSort {

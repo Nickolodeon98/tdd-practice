@@ -1,4 +1,4 @@
-package algorithms.radixsort;
+package algorithms.sort.radixsort;
 
 import java.util.*;
 
