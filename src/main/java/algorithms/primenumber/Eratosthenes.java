@@ -1,6 +1,5 @@
 package algorithms.primenumber;
 
-import java.time.chrono.Era;
 
 public class Eratosthenes {
     public int eratosthenes(int N) {
