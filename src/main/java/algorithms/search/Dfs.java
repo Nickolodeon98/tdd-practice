@@ -5,8 +5,10 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Dfs {
-  String name = "";
-  public void moveCursor(String name) {
+  String name = "JAEROEN";
+  HashSet<Integer> visit = new HashSet<>();
+
+  public void moveCursor() {
     int front = 0;
     int back = name.length()-1;
     int curPos = 0;
@@ -17,28 +19,33 @@ public class Dfs {
       if (name.charAt(i) == 'A') continue;
       notAs.add(i);
     }
+    int answer = search(curPos, front, back, 0);
 
-    search(curPos, front, back);
-
+    System.out.println(answer);
   }
 
   public int minDist(int curPos, int tarPos) {
     int indirect = curPos > tarPos ? tarPos - curPos : curPos - tarPos;
     return Math.min(Math.abs(curPos - tarPos), name.length() + indirect);
   }
-  HashSet<Integer> visit = new HashSet<>();
   public int search(int x, int front, int back, int dist) {
     visit.add(x);
+    int frontDist = 0;
+    int backDist = 0;
     if (front > back) return dist;
     if (!visit.contains(front)) {
-      dist += minDist(x, front);
-      dist = search(front, ++front, back, dist);
+      frontDist = dist + minDist(x, front);
+      frontDist = search(front, ++front, back, frontDist);
     }
     if (!visit.contains(back)) {
-      dist = minDist(x, back);
-      dist = Math.min(dist, search(back, --back, back, dist));
+      backDist = dist + minDist(x, back);
+      backDist = search(back, --back, back, backDist);
     }
-    return dist;
+    return Math.min(frontDist, backDist);
   }
 
+  public static void main(String[] args) {
+    Dfs dfs = new Dfs();
+    dfs.moveCursor();
+  }
 }

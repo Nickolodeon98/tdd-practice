@@ -59,6 +59,15 @@ public class OptimalStrategy {
         for (Duple[] dupleGroup : gameBoard) {
             System.out.println(Arrays.toString(dupleGroup));
         }
+
+        for (int i = 0; i < gameBoard.length; i++) {
+            for (int j = 0; j < gameBoard[i].length; j++) {
+
+
+            }
+
+        }
+
     }
 
     public static void main(String[] args) {

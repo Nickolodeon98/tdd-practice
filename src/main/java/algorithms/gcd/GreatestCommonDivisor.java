@@ -1,5 +1,7 @@
 package algorithms.gcd;
 
+import java.util.Scanner;
+
 public class GreatestCommonDivisor {
     /* 반환 타입은 최대공약수를 반환해야 하므로 정수로 한다.
      * 최대공약수를 정의하는 네 가지 정의를 조건문에 넣어 사용한다.
@@ -17,6 +19,10 @@ public class GreatestCommonDivisor {
 
     public static void main(String[] args) {
         GreatestCommonDivisor gcd = new GreatestCommonDivisor();
-        gcd.computeDivisor(14, 16); // 기댓값: 2
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+
+        System.out.println(gcd.computeDivisor(a, b)); // 기댓값: 2
     }
 }
