@@ -33,17 +33,21 @@ public class B16637 {
   }
 
   public void DFS(int identifierIdx, int start) {
-
-
+    if (identifierIdx == )
+    for ()
     int one = cal(identifierIdx, start, numbers.get(identifierIdx + 1));
-    DFS()
+    sum = DFS(identifierIdx + 1, one);
     if (identifierIdx + 1 < identifiers.size()) {
       int two = cal(identifierIdx, numbers.get(identifierIdx + 1), numbers.get(identifierIdx + 2));
-      DFS
+      DFS(identifierIdx + 2, two);
     }
   }
 
   public int cal(int idx, int a, int b) {
+    if (identifiers.get(idx) == '+') return a + b;
 
+    if (identifiers.get(idx) == '*') return a * b;
+
+    if (identifiers.get(idx) == '-') return a - b;
   }
 }
