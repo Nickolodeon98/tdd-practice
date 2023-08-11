@@ -3,7 +3,7 @@ package algorithms.softeer;
 import java.io.*;
 import java.util.*;
 
-public class S1259 {
+public class S1256 {
 
   static class Employee {
 
