@@ -9,6 +9,7 @@ import java.util.StringTokenizer;
 public class QueueWithStack {
 
   static class QueueUsingStack {
+
     // 입력 용도
     Stack<Integer> stack1;
     // pop 용도
@@ -25,7 +26,9 @@ public class QueueWithStack {
 
     int dequeue() {
       if (stack2.isEmpty()) {
-        while (!stack1.isEmpty()) stack2.push(stack1.pop());
+        while (!stack1.isEmpty()) {
+          stack2.push(stack1.pop());
+        }
       }
       return stack2.pop();
     }
