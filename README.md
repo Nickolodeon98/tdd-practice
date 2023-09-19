@@ -1,3 +1,11 @@
+# 코딩 테스트 연습 프로젝트
+
+## 백준
+
+[B1027](https://github.com/Nickolodeon98/tdd-practice/blob/main/src/main/java/algorithms/baekjoon/B1027.java)
+
+<hr>
+
 # tdd-practice
 
 ### Test Driven Development를 연습
