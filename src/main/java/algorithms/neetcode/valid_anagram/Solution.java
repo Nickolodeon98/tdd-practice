@@ -13,10 +13,10 @@ class Solution {
     StringBuilder sB = new StringBuilder();
     StringBuilder sT = new StringBuilder();
 
-    Arrays.stream(sChars).forEach(e -> sB.append(e));
-    Arrays.stream(tChars).forEach(e -> sT.append(e));
+    Arrays.stream(sChars).forEach(sB::append);
+    Arrays.stream(tChars).forEach(sT::append);
 
-    return sB.toString().equals(sT.toString());
+    return sB.toString().contentEquals(sT);
   }
 }
 
