@@ -5,23 +5,18 @@ import java.util.Arrays;
 public class Permutation {
 
   public static void findNextPermutation(int[] givenArr) {
-    int i = 1, j = 0;
+    int j = 0, i = givenArr.length - 1;
 
-    for (int index = 1; index < givenArr.length; index++) {
-      if (givenArr[index - 1] <= givenArr[index]) {
-        i = index;
-      }
+    while (i >= 1 && givenArr[i] < givenArr[i - 1]) {
+      i--;
     }
 
-    j = i;
-
-    for (int index = j; index < givenArr.length; index++) {
-      if (givenArr[index] > givenArr[i-1]) {
-        j = index;
-      }
+    j = i - 1;
+    while (j + 1 < givenArr.length - 1 && givenArr[i - 1] < givenArr[j + 1]) {
+      j++;
     }
 
-    swap(givenArr, i-1, j);
+    swap(givenArr, i - 1, j);
 
     int end = givenArr.length - 1;
     while (i < end) {
@@ -40,7 +35,7 @@ public class Permutation {
   }
 
   public static void main(String[] args) {
-    findNextPermutation(new int[]{7,2,3,6,5,4,1});
+    findNextPermutation(new int[]{7, 2, 3, 6, 5, 4, 1});
   }
 
 }
