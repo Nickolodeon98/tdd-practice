@@ -3,19 +3,11 @@ package algorithms.neetcode.same_tree;
 class Solution {
   public boolean isSameTree(TreeNode p, TreeNode q) {
     if (p == null) {
-      if (q == null) {
-        return true;
-      } else {
-        return false;
-      }
+      return q == null;
     }
 
     if (q == null) {
-      if (p == null) {
-        return true;
-      } else {
-        return false;
-      }
+      return false;
     }
 
     if (p.val != q.val) {
