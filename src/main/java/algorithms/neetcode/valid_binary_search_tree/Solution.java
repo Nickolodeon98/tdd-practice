@@ -48,11 +48,11 @@ public class Solution {
 
       rightValues.add(node.right.val);
 
-      if (isRight) {
-        if (node.right.val <= node.val) {
-          return false;
-        }
-      }
+//      if (isRight) {
+//        if (node.right.val <= node.val) {
+//          return false;
+//        }
+//      }
 
     }
 
